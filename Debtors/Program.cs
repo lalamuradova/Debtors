@@ -29,11 +29,335 @@ class Program
             return $"{this.FullName} {this.BirthDay.ToShortDateString()} {this.Phone} {this.Email} {this.Address} {this.Debt}";
         }
     }
-     
+
+    class Run
+    {
+        public List<Debtor> debtors { get; set; } = new List<Debtor>();
+
+        public void AddDebtor(Debtor de)
+        {
+            debtors.Add(de);
+        }
+        public void Choise()
+        {
+            Console.WriteLine("[1]  rhyta.com ve ya dayrep.com domenlerinde emaili olan borclulari cixartmag.");
+            Console.Write("\n");
+            Console.WriteLine("[2]  Yashi 26 - dan 36 - ya qeder olan borclulari cixartmag.");
+            Console.Write("\n");
+            Console.WriteLine("[3]  Borcu 5000 - den cox olmayan borclularic cixartmag");
+            Console.Write("\n");
+            Console.WriteLine("[4]  Butov adi 18 simvoldan cox olan ve telefon nomresinde 2 ve ya 2 - den cox 7 reqemi olan borclulari cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[5]  Qishda anadan olan borclulari cixardmaq");
+            Console.Write("\n");
+            Console.WriteLine("[6]  Borcu, umumi borclarin orta borcunnan cox olan borclulari cixarmaq ve evvel familyaya gore sonra ise meblegin azalmagina gore sortirovka etmek");
+            Console.Write("\n");
+            Console.WriteLine("[7]  Telefon nomresinde 8 olmayan borclularin yalniz familyasin, yashin ve umumi borcun meblegin cixarmaq");
+            Console.Write("\n");
+            Console.WriteLine("[8]  Adinda ve familyasinda hec olmasa 3 eyni herf olan borclularin siyahisin cixarmaq ve onlari elifba sirasina gore sortirovka elemek");
+            Console.Write("\n");
+            Console.WriteLine("[9]  Borclulardan en coxu hansi ilde dogulubsa hemin ili cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[10] Borcu en boyuk olan 5 borclunun siyahisini cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[11] Butun borcu olanlarin borcunu cemleyib umumi borcu cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[12] 2ci dunya muharibesin gormush borclularin siyahisi cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[13] Nomresinde tekrar reqemler olmayan borclularin ve onlarin borcunun meblegin cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[14] Tesevvur edek ki,butun borclari olanlar bugunden etibaren her ay 500 azn pul odeyecekler.Oz ad gunune kimi borcun oduyub qurtara bilenlerin siyahisin cixartmaq");
+            Console.Write("\n");
+            Console.WriteLine("[15] Adindaki ve familyasindaki herflerden 'smile' sozunu yaza bileceyimiz borclularin siyahisini cixartmaq");
+            Console.Write("\nChoose: ");
+            string ch = Console.ReadLine();
+            Console.Clear();
+
+            if (ch == "1")
+            {
+                Choise1();
+            }
+            else if (ch == "2")
+            {
+                Choise2();
+            }
+            else if (ch == "3")
+            {
+                Choise3();
+            }
+            else if (ch == "4")
+            {
+                Choise4();
+            }
+            else if (ch == "5")
+            {
+                Choise5();
+            }
+            else if (ch == "6")
+            {
+                Choise6();
+            }
+            else if (ch == "7")
+            {
+                Choise7();
+            }
+            else if (ch == "8")
+            {
+                Choise8();
+            }
+            else if (ch == "9")
+            {
+                Choise9();
+            }
+            else if (ch == "10")
+            {
+                Choise10();
+            }
+            else if (ch == "11")
+            {
+                Choise11();
+            }
+            else if (ch == "12")
+            {
+                Choise12();
+            }
+            else if (ch == "13")
+            {
+                Choise13();
+            }
+            else if (ch == "14")
+            {
+                Choise14();
+            }
+            else if (ch == "15")
+            {
+                Choise15();
+            }
+            else
+            {
+                Console.WriteLine("Incorrect entered ");
+
+            }
+            Back();
+        }
+        public void Back()
+        {
+            Console.Write("\n\n[0] Back: ");
+            string ch = Console.ReadLine();
+            if (ch == "0")
+            {
+                Console.Clear();
+                Choise();
+            }
+            else
+            {
+                Console.WriteLine("Incorrect entered ");
+                Back();
+            }
+        }
+
+        public void Choise1()
+        {
+            var list = debtors.FindAll(d => d.Email.Contains("rhyta.com"));
+            list.ForEach(d => Console.WriteLine(d.FullName));
+        }
+        public void Choise2()
+        {
+            var list2 = debtors.Where(d => (DateTime.Now.Year - d.BirthDay.Year) >= 26)
+            .Where(d => (DateTime.Now.Year - d.BirthDay.Year) < 36);
+            foreach (var item in list2)
+            {
+                Console.Write(item.FullName);
+                Console.WriteLine($" {item.BirthDay}");
+            }
+        }
+        public void Choise3()
+        {
+            var list3 = debtors.Where(d => d.Debt <= 5000);
+            foreach (var item in list3)
+            {
+                Console.WriteLine(item.FullName);
+                Console.WriteLine($" {item.Debt}");
+            }
+        }
+        public void Choise4()
+        {
+            var list4 = debtors.Where(d => d.FullName.Length >= 18 && d.Phone.Count(s => s == '7') >= 2);
+
+            foreach (var item in list4)
+            {
+                Console.Write(item.FullName);
+                Console.WriteLine($" {item.Phone}");
+            }
+        }
+        public void Choise5()
+        {
+            var list5 = debtors.Where(d => d.BirthDay.Month == 12 || d.BirthDay.Month == 1 || d.BirthDay.Month == 2);
+            foreach (var item in list5)
+            {
+                Console.Write(item.FullName);
+                Console.WriteLine($"             {item.BirthDay}");
+            }
+        }
+        public void Choise6()
+        {
+            Console.WriteLine("*[6]  Borcu, umumi borclarin orta borcunnan cox olan borclulari cixarmaq ve evvel familyaya gore sonra ise meblegin azalmagina gore sortirovka etmek");
+            //
+            var average = debtors.Average(d => d.Debt);
+            var list6 = debtors
+                .Where(d => d.Debt > average)
+                .OrderBy(d => d.FullName)
+                .OrderByDescending(d => d.Debt);
+
+            foreach (var item in list6)
+            {
+                Console.Write(item.FullName);
+                Console.WriteLine($"             {item.Debt}");
+            }
+        }
+        public void Choise7()
+        {
+            // Telefon nomresinde 8 olmayan borclularin yalniz familyasin, yashin ve umumi borcun meblegin cixarmaq
+            var list = debtors.Where(s => !s.Phone.Contains('8'))
+                .Select(d => d.FullName + " " + (DateTime.Now.Year - d.BirthDay.Year).ToString() + " " + d.Debt.ToString());
+            foreach (var item in list)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        public int count(string fullname, char c)
+        {
+            return fullname.Count(f => f == c);
+        }
+        public void Choise8()
+        {
+            Console.WriteLine("[8]  Adinda ve familyasinda hec olmasa 3 eyni herf olan borclularin siyahisin cixarmaq ve onlari elifba sirasina gore sortirovka elemek");
+
+
+            var items = debtors
+                .Where(d =>
+                {
+                    int c = 0;
+                    foreach (var item in d.FullName)
+                    {
+                        c = count(d.FullName, item);
+                    }
+                    return c >= 3;
+                });
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
+        }
+        public void Choise9()
+        {
+            // Borclulardan en coxu hansi ilde dogulubsa hemin ili cixartmaq
+            var year = debtors
+                .GroupBy(d => d.BirthDay.Year)
+                ;
+            int max = 0;
+            int counter = 0;
+            int y = 0;
+            foreach (var item in year)
+            {
+                foreach (var a in item)
+                {
+                    ++counter;
+                }
+                if (counter >= max)
+                {
+                    max = counter;
+                    y = item.Key;
+                }
+                counter = 0;
+            }
+            Console.WriteLine(y);
+        }
+        public void Choise10()
+        {
+            //Borcu en boyuk olan 5 borclunun siyahisini cixartmaq
+            var list = debtors.OrderByDescending(d => d.Debt)
+                .Take(5);
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.Debt);
+            }
+        }
+        public void Choise11()
+        {
+            //Butun borcu olanlarin borcunu cemleyib umumi borcu cixartmaq
+            var sum = debtors.Sum(d => d.Debt);
+            Console.WriteLine(sum);
+        }
+        public void Choise12()
+        {
+            //2ci dunya muharibesin gormush borclularin siyahisi cixartmaq
+            var list = debtors.Where(d => d.BirthDay.Year <= 1945);
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.BirthDay.Year);
+            }
+        }
+        public void Choise13()
+        {
+            //Nomresinde tekrar reqemler olmayan borclularin ve onlarin borcunun meblegin cixartmaq
+            var items = debtors
+                .Where(d =>
+                {
+                    int c = 0;
+                    foreach (var item in d.Phone)
+                    {
+                        c = count(d.Phone, item);
+                        if (c > 1)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Phone);
+            }
+        }
+        public void Choise14()
+        {
+            //Tesevvur edek ki,butun borclari olanlar bugunden etibaren her ay 500 azn pul odeyecekler.
+            ////Oz ad gunune kimi borcun oduyub qurtara bilenlerin siyahisin cixartmaq
+
+            var list = debtors.Where(d => 
+            {
+                if(DateTime.Now.Month>= d.BirthDay.Month)
+                {
+                    return (DateTime.Now.Month - d.BirthDay.Month) * 500 >= d.Debt;
+                   
+                }
+                else
+                {
+                    return (d.BirthDay.Month - DateTime.Now.Month) * 500 >= d.Debt;
+                }
+
+            });
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.Debt);
+            }
+        }
+        public void Choise15()
+        {
+            //Adindaki ve familyasindaki herflerden 'smile' sozunu yaza bileceyimiz borclularin siyahisini cixartmaq
+            var list = debtors.Where(d => d.FullName.Contains('s') && d.FullName.Contains('m') && d.FullName.Contains('i') && d.FullName.Contains('l') && d.FullName.Contains('e'));
+            foreach (var item in list)
+            {
+                Console.WriteLine(item.FullName);
+            }
+        }
+    }
+
     static void Main()
     {
         List<Debtor> debtors = new List<Debtor> {
-            new Debtor("Shirley T. Qualls", DateTime.Parse("March 30, 1932"), "530-662-7732", "ShirleyTQualls@teleworm.us", "3565 Eagles Nest Drive Woodland, CA 95695", 2414),
+            new Debtor("Shirley T. Qualls", DateTime.Parse("March 30, 1932"), "12345678", "ShirleyTQualls@teleworm.us", "3565 Eagles Nest Drive Woodland, CA 95695", 2414),
             new Debtor("Danielle W. Grier", DateTime.Parse("October 18, 1953"), "321-473-4178", "DanielleWGrier@rhyta.com", "1973 Stoneybrook Road Maitland, FL 32751", 3599),
             new Debtor("Connie W. Lemire", DateTime.Parse("June 18, 1963"), "828-321-3751", "ConnieWLemire@rhyta.com", "2432 Hannah Street Andrews, NC 28901", 1219),
             new Debtor("Coy K. Adams", DateTime.Parse("March 1, 1976"), "410-347-1307", "CoyKAdams@dayrep.com", "2411 Blue Spruce Lane Baltimore, MD 21202", 3784),
@@ -81,72 +405,13 @@ class Program
             new Debtor("Pamela H. Beauchamp", DateTime.Parse("November 20, 1959"), "801-559-6347", "PamelaHBeauchamp@jourrapide.com", "3239 Tori Lane Salt Lake City, UT 84104", 6588)
         };
 
-        ////    2) rhyta.com ve ya dayrep.com domenlerinde emaili olan borclulari cixartmag        
-        //var list = debtors.FindAll(d => d.Email.Contains("rhyta.com"));
-        //list.ForEach(d => Console.WriteLine(d.FullName));
+        Run run = new Run();
+        foreach (var de in debtors)
+        {
+            run.AddDebtor(de);
+        }
+        run.Choise();
 
 
-
-        ////3) Yashi 26 - dan 36 - ya qeder olan borclulari cixartmag
-        //var list2 = debtors.Where(d => (DateTime.Now.Year - d.BirthDay.Year) >= 26)
-        //.Where(d => (DateTime.Now.Year - d.BirthDay.Year) < 36);
-        //foreach (var item in list2)
-        //{
-        //    Console.Write(item.FullName);
-        //    Console.WriteLine($" {item.BirthDay}");
-        //}
-
-
-
-
-
-        ////4) Borcu 5000 - den cox olmayan borclularic cixartmag
-        //var list3 = debtors.Where(d => d.Debt <= 5000);
-        //foreach (var item in list3)
-        //{
-        //    Console.WriteLine(item.FullName);
-        //    Console.WriteLine($" {item.Debt}");
-        //}
-
-
-
-
-        //5) Butov adi 18 simvoldan cox olan ve telefon nomresinde 2 ve ya 2 - den cox 7 reqemi olan borclulari cixartmaq
-        var count = debtors.Count(d => d.Phone.Contains("7"));
-        Console.WriteLine(count);
-        //var list4=debtors.Where(d=>d.FullName.Length>=18)
-        //    .Where(d=> d.
-
-        //7) Qishda anadan olan borclulari cixardmaq
-
-
-        //8) Borcu, umumi borclarin orta borcunnan cox olan borclulari cixarmaq ve evvel familyaya gore sonra ise meblegin azalmagina gore sortirovka etmek
-
-
-        //9) Telefon nomresinde 8 olmayan borclularin yalniz familyasin, yashin ve umumi borcun meblegin cixarmaq
-
-
-        //11)Adinda ve familyasinda hec olmasa 3 eyni herf olan borclularin siyahisin cixarmaq ve onlari elifba sirasina gore sortirovka elemek
-
-
-        //13)borclulardan en coxu hansi ilde dogulubsa hemin ili cixartmaq
-
-
-        //14)Borcu en boyuk olan 5 borclunun siyahisini cixartmaq
-
-
-        //15)Butun borcu olanlarin borcunu cemleyib umumi borcu cixartmaq
-
-
-        //16)2ci dunya muharibesin gormush borclularin siyahisi cixartmaq
-
-
-        //18)Nomresinde tekrar reqemler olmayan borclularin ve onlarin borcunun meblegin cixartmaq
-
-
-        //19)Tesevvur edek ki,butun borclari olanlar bugunden etibaren her ay 500 azn pul odeyecekler.Oz ad gunune kimi borcun oduyub qurtara bilenlerin siyahisin cixartmaq
-
-
-        //20)Adindaki ve familyasindaki herflerden "smile" sozunu yaza bileceyimiz borclularin siyahisini cixartmaq
     }
 }
